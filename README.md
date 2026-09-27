@@ -1,68 +1,143 @@
+# YouTube Shorts Automation with n8n
 
-#  YouTube Shorts Automation with n8n
+An automated workflow for generating and publishing YouTube Shorts using n8n. The workflow takes content from Google Sheets, generates the required script using an AI API, processes the content, creates a video through Creatomate, and publishes the finished video to YouTube.
 
-An end-to-end automation workflow that generates and publishes YouTube Shorts automatically using n8n.
+## Demo
 
-## What it does
+### Complete Workflow Execution
 
-This workflow automates:
+This video shows the complete workflow running from the initial Google Sheets input through video generation and YouTube upload.
 
+[Watch the complete workflow execution](https://youtu.be/nT-FBpS2-1g)
+
+### Workflow Walkthrough
+
+This video provides a step-by-step view of the workflow and the individual stages involved in the automation.
+
+[Watch the workflow walkthrough](https://youtu.be/x48uF1NvSZQ)
+
+## Workflow Architecture
+
+![Workflow Architecture]
+
+The workflow follows this general pipeline:
+
+```text
 Google Sheets
-↓
+      |
+      v
+Read Content
+      |
+      v
 AI Script Generation
-↓
-Text/Content Processing
-↓
+      |
+      v
+Content Processing / Translation
+      |
+      v
 Creatomate Video Generation
-↓
-Video Rendering
-↓
-Google Drive
-↓
+      |
+      v
+Render Status Check
+      |
+      v
+Download Generated Video
+      |
+      v
 YouTube Upload
-↓
-Google Sheets Update
 
-## 🛠️ Technologies
+```
+
+## How It Works
+
+### 1. Google Sheets
+
+The workflow reads the content and processing status from Google Sheets. This provides a simple way to manage the content that needs to be converted into videos.
+
+### 2. AI Content Generation
+
+The selected content is sent to an AI API to generate the script used in the Short.
+
+### 3. Content Processing
+
+The generated content is processed and translated according to the workflow configuration before being passed to the video generation stage.
+
+### 4. Video Generation
+
+The processed script and media information are sent to Creatomate, which generates the video using a predefined template.
+
+### 5. Render Status
+
+Video generation is asynchronous, so the workflow checks the render status before continuing. If the video is not ready, the workflow waits and checks again.
+
+### 6. Video Download
+
+Once the render is completed successfully, the generated video is retrieved and prepared for upload.
+
+### 7. YouTube Upload
+
+The generated video is uploaded to YouTube using the YouTube Data API.
+
+
+## Technologies Used
 
 - n8n
-- Google Sheets API
-- Google Drive API
-- Creatomate API
+- Google Sheets
+- Google Drive
+- OpenRouter
+- Creatomate
 - YouTube Data API
-- OpenRouter / LLM
+- Google Translate
 - JavaScript
 - REST APIs
 
-## 🔄 Workflow
+## Key Features
 
-The workflow:
+- End-to-end workflow automation
+- AI-based script generation
+- Google Sheets integration
+- Automated translation
+- Template-based video generation
+- Asynchronous render-status checking
+- Automated YouTube publishing
+- Google Sheets status tracking
+- API-based integration between multiple services
 
-1. Reads content from Google Sheets
-2. Generates the required content using AI
-3. Sends the content to Creatomate
-4. Waits for video rendering
-5. Checks the rendering status
-6. Downloads the generated video
-7. Uploads the video to YouTube
-8. Updates the Google Sheet
+## Project Structure
 
-##  Workflow Preview
+```text
+n8n-youtube-shorts-automation/
+|
+├── README.md
+├── workflow-screenshot.png
+└── demo/
+    ├── full-workflow-demo
+    └── workflow-walkthrough
+```
 
-Add a screenshot of the complete n8n workflow here.
+The demonstration videos are hosted externally to keep the repository lightweight.
 
-##  Demo
+## Security
 
-Live automation environment:
+API keys, OAuth credentials, access tokens, and other sensitive information should not be committed to the repository.
 
-> The n8n editor is kept private. A public demo/screenshot is provided instead.
+The workflow shared publicly should use placeholders or n8n credentials instead of exposing actual API credentials.
 
-##  Security
+## Future Improvements
 
-API keys, OAuth credentials, tokens and private workflow credentials are **not included** in this repository.
+- Automatic thumbnail generation
+- Automatic title and description generation
+- Hashtag generation
+- Duplicate-content detection
+- Improved retry and error handling
+- YouTube scheduling
+- Analytics collection
+- Support for additional content sources
 
-##  Author
+## Author
 
-**Akash Patil**
+Akash Patil
+
+Computer Science Engineering Student
 
 GitHub: https://github.com/akashpatil6294
